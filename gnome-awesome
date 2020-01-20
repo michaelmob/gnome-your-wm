@@ -1,0 +1,16 @@
+#!/bin/sh
+# send a message to the session manager
+session() {
+  [ -n "$DESKTOP_AUTOSTART_ID" ] || return
+  local dest='org.gnome.SessionManager'
+  dbus-send --print-reply --session --dest=$dest /${dest//.//} $dest.$1 ${@:2}
+}
+
+# register desktop
+session RegisterClient string:gnome-awesome string:$DESKTOP_AUTOSTART_ID
+
+# launch window manager
+${AWESOME_WM_PATH:-awesome}
+
+# logout after window manager has exited
+session Logout uint32:1
