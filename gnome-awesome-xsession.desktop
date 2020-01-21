@@ -4,4 +4,4 @@ Name=GNOME + Awesome
 Comment=This session logs you into GNOME with the Awesome window manager.
 TryExec=gnome-awesome
 Exec=env GNOME_SHELL_SESSION_MODE=classic gnome-session --builtin --session awesome
-DesktopNames=GNOME;Awesome;GNOME-Awesome
+DesktopNames=GNOME;Awesome;GNOME-Flashback
