@@ -1,10 +1,10 @@
 [Desktop Entry]
 Type=Application
-Name=gnome-awesome
-TryExec=gnome-awesome
-Exec=gnome-awesome
+Name=gnome-your-wm
+TryExec=gnome-your-wm
+Exec=gnome-your-wm
 NoDisplay=true
-X-GNOME-WMName=awesome
+X-GNOME-WMName=your-wm
 X-GNOME-Provides=windowmanager
 X-GNOME-Autostart-Phase=Initialization
 X-GNOME-Autostart-Notify=false

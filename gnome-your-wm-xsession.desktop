@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=GNOME + WM
+Comment=This session logs you into GNOME with your favorite window manager.
+TryExec=gnome-your-wm
+Exec=env GNOME_SHELL_SESSION_MODE=classic gnome-session --builtin --session gnome-your-wm
+DesktopNames=GNOME;GNOME-Flashback

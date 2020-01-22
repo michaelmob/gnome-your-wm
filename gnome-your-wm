@@ -1,0 +1,48 @@
+#!/usr/bin/env sh
+
+#
+# log an event
+#
+log() {
+  logger --priority user.$1 --tag gnome-your-wm "$2"
+}
+
+#
+# send a message to the session manager
+#
+session() {
+  [ -n "$DESKTOP_AUTOSTART_ID" ] || return
+  local dest='org.gnome.SessionManager'
+  dbus-send --print-reply --session --dest=$dest /${dest//.//} $dest.$1 ${@:2}
+}
+
+# set variables
+RC_PATH="${XDG_CONFIG_HOME:-$HOME/.config}/gnome-your-wm"
+RC_FILE="$RC_PATH/run"
+
+# ensure rc file exists or create rc file
+if [ ! -f "$RC_FILE" ]; then
+  # check for commonly installed window managers
+  for wm in i3 awesome bspwm; do
+    command -v $wm && WM="$wm"
+  done
+
+  # create rc path and file
+  mkdir -p "$RC_PATH" && \
+    printf "#!/usr/bin/env sh\n# compositor\npicom &\n# your wm\n${WM:-i3}" > "$RC_FILE"
+
+  # make file executable
+  chmod u+x "$RC_FILE" || log warning 'Unable to create rc file!'
+fi
+
+# ensure rc file is executable
+[ ! -x "$RC_FILE" ] && log error 'Unable to run rc file!'
+
+# register desktop
+session RegisterClient string:gnome-your-wm string:$DESKTOP_AUTOSTART_ID
+
+# launch window manager
+"$RC_FILE"
+
+# logout after window manager has exited
+session Logout uint32:1
