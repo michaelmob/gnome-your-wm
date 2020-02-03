@@ -1,18 +1,35 @@
-SCRIPT_PATH   = /usr/bin/gnome-your-wm
-DESKTOP_PATH  = /usr/share/applications/gnome-your-wm.desktop
-XSESSION_PATH = /usr/share/xsessions/gnome-your-wm.desktop
-SESSION_PATH  = /usr/share/gnome-session/sessions/gnome-your-wm.session
+INSTALL = install
+DESTDIR ?= /
+PREFIX  ?= $(DESTDIR)/usr
+PKGVER  ?= 0
+
+SCRIPT_PATH   = $(PREFIX)/bin/gnome-your-wm
+DESKTOP_PATH  = $(PREFIX)/share/applications/gnome-your-wm.desktop
+XSESSION_PATH = $(PREFIX)/share/xsessions/gnome-your-wm.desktop
+SESSION_PATH  = $(PREFIX)/share/gnome-session/sessions/gnome-your-wm.session
 
 install:
-	install -m 0755 -D gnome-your-wm $(SCRIPT_PATH)
-	install -m 0644 -D gnome-your-wm.desktop $(DESKTOP_PATH)
-	install -m 0644 -D gnome-your-wm-xsession.desktop $(XSESSION_PATH)
-	install -m 0644 -D gnome-your-wm.session $(SESSION_PATH)
+	$(INSTALL) -m 0755 -D gnome-your-wm $(SCRIPT_PATH)
+	$(INSTALL) -m 0644 -D gnome-your-wm.desktop $(DESKTOP_PATH)
+	$(INSTALL) -m 0644 -D gnome-your-wm-xsession.desktop $(XSESSION_PATH)
+	$(INSTALL) -m 0644 -D gnome-your-wm.session $(SESSION_PATH)
 
-clean:
+uninstall:
 	rm -f $(SCRIPT_PATH)
 	rm -f $(DESKTOP_PATH)
 	rm -f $(XSESSION_PATH)
 	rm -f $(SESSION_PATH)
 
-.PHONY: install clean
+package:
+	tar -cvzf gnome-your-wm-$(PKGVER).tar.gz \
+		gnome-your-wm \
+		gnome-your-wm.desktop \
+		gnome-your-wm.session \
+		gnome-your-wm-xsession.desktop \
+		Makefile \
+		README.md \
+		LICENSE \
+		PKGBUILD
+
+
+.PHONY: install uninstall
