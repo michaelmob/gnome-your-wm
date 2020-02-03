@@ -6,6 +6,7 @@ of your choosing.
 ## Required Packages
 * make
 * gnome
+* gdm
 * gnome-flashback
 * gnome-screensaver
 * polkit-gnome
@@ -16,15 +17,19 @@ sudo make install
 ```
 
 ## Configuration
+The run command file should be an executable (+x) script located at
+`$XDG_CONFIG_HOME/gnome-your-wm/run`.
 ```sh
-# $XDG_CONFIG_HOME/gnome-your-wm/run
 #!/usr/bin/env sh
 
-# compositor
+# autostart applications
 picom &
+redshift &
+imwheel &
 
 # window manager
 i3
-awesome
-bspwm
 ```
+
+Should any issues arise, check your system logs for messages with the tag:
+`gnome-your-wm`.
