@@ -28,6 +28,9 @@ package:
 		PKGBUILD LICENSE Makefile README.md gnome-your-wm \
 		gnome-your-wm.desktop gnome-your-wm-xsession.desktop \
 		gnome-your-wm.session
+	makepkg -g >> PKGBUILD && makepkg
+	rm -rf pkg
+	rm -rf src
 
 clean:
 	rm -f $(PKGNAME)-*.tar*
