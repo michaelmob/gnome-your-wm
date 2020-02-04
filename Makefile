@@ -30,6 +30,8 @@ package:
 		gnome-your-wm.session
 
 clean:
-	rm -f $(PKGNAME)-*.tar.gz
+	rm -f $(PKGNAME)-*.tar*
+	rm -rf pkg
+	rm -rf src
 
 .PHONY: install uninstall
