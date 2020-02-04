@@ -9,8 +9,7 @@ url='https://github.com/thetarkus/gnome-your-wm'
 license=('MIT')
 depends=('make' 'gnome-flashback' 'gnome-screensaver' 'polkit-gnome')
 groups=('gnome')
-source=("$pkgname-$pkgver.tar.gz::https://github.com/thetarkus/gnome-your-wm/archive/$pkgname-$pkgver.tar.gz")
-md5sums=()
+source=("$pkgname-$pkgver.tar.gz::https://github.com/thetarkus/gnome-your-wm/archive/$pkgver.tar.gz")
 
 package() {
   cd "$pkgname-$pkgver"
