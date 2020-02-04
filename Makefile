@@ -1,7 +1,9 @@
+PKGNAME ?= gnome-your-wm
+PKGVER  ?= 0
+
 INSTALL = install
 DESTDIR ?= /
 PREFIX  ?= $(DESTDIR)/usr
-PKGVER  ?= 0
 
 SCRIPT_PATH   = $(PREFIX)/bin/gnome-your-wm
 DESKTOP_PATH  = $(PREFIX)/share/applications/gnome-your-wm.desktop
@@ -21,15 +23,13 @@ uninstall:
 	rm -f $(SESSION_PATH)
 
 package:
-	tar -cvzf gnome-your-wm-$(PKGVER).tar.gz \
-		gnome-your-wm \
-		gnome-your-wm.desktop \
-		gnome-your-wm.session \
-		gnome-your-wm-xsession.desktop \
-		Makefile \
-		README.md \
-		LICENSE \
-		PKGBUILD
+	tar -cvzf $(PKGNAME)-$(PKGVER).tar.gz \
+		--transform 's,^,$(PKGNAME)-$(PKGVER)/,' \
+		PKGBUILD LICENSE Makefile README.md gnome-your-wm \
+		gnome-your-wm.desktop gnome-your-wm-xsession.desktop \
+		gnome-your-wm.session
 
+clean:
+	rm -f $(PKGNAME)-*.tar.gz
 
 .PHONY: install uninstall
