@@ -11,9 +11,14 @@ of your choosing.
 * gnome-screensaver
 * polkit-gnome
 
+### Arch Linux
+```sh
+sudo pacman -Syy make gnome gnome-flashback gnome-screensaver polkit-gnome
+```
+
 ## Installation
 ```sh
-sudo make install
+git clone https://github.com/thetarkus/gnome-your-wm && cd ./gnome-your-wm && sudo make install
 ```
 
 ## Configuration
@@ -31,5 +36,9 @@ imwheel &
 i3
 ```
 
+## Usage
+Select `Gnome + WM` as your desktop environment in your display manager.
+
+## Logs
 Should any issues arise, check your system logs for messages with the tag:
 `gnome-your-wm`.
